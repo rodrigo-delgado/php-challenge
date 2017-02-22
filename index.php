@@ -5,8 +5,14 @@
     <title>HomePage</title>
   </head>
   <body>
-    <h1>User Authentication System</h1>
+    <h1>User Authentication System</h1><hr />
 
-    <?php include_once 'resource/database.php' ?>
+    <p>
+      You are currently not sign in <a href="login.php">Login</a><br />
+      Not yet a member? <a href="signup.php">Signup</a>
+    </p>
+    <p>
+      You are logged in as {username} <a href="logout.php">Logout</a>
+    </p>
   </body>
 </html>
