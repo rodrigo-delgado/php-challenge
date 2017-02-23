@@ -1,6 +1,7 @@
 <?php
 //add our database connection script
 include_once 'resource/database.php';
+include_once 'resource/utilities.php';
 
 //process the form if the button is click
 if (isset($_POST['signupBtn'])) {
@@ -11,12 +12,19 @@ if (isset($_POST['signupBtn'])) {
     //Form validation
     $requiered_fields = array('email', 'username', 'password');
 
-    //loop through the $requiered_fields array
-    foreach ($requiered_fields as $name_of_field) {
-      if(!isset($_POST[$name_of_field]) || $_POST[$name_of_field] == NULL) {
-        $form_errors[] = $name_of_field;
-      }
-    }
+    //Call the function to check empty field
+    $form_errors = array_merge($form_errors, check_empty_fields($requiered_fields));
+
+    //Fields that requires checking for minimum length
+    $fields_to_check_length = array('username' => 4, 'password' => 6);
+
+    //call the function to check the minimum required length
+    $form_errors = array_merge($form_errors, check_min_length($fields_to_check_length));
+
+    //email validation
+    $form_errors = array_merge($form_errors, check_email($_POST));
+
+
 //check if error array is empty, if yes process form data and insert record
 if (empty($form_errors)) {
 
@@ -49,31 +57,6 @@ if (empty($form_errors)) {
       }
 }
 
-
-else {
-  if (count($form_errors) == 1) {
-    $result = "<p> There was 1 error in the form<br>";
-
-    $result .= "<ul>";
-
-    //loop through error array and display all imagecreatefromstring
-    foreach($form_errors as $error) {
-      $result .= "<li>{$error}</li>";
-    }
-    $result .= "</ul></p>";
-
-
-    } else {
-      $result = "<p style='color: red;'>There were " .count($form_errors). "errors in the form <br />";
-
-      $result .= "<ul>";
-      //loop through error array and display all items
-      foreach ($form_errors as $error) {
-        $result .= "<li>{$error}</li>";
-      }
-      $result .= "</ul></p>";
-    }
-}
 }
 ?>
 
@@ -89,6 +72,7 @@ else {
     <h2>Registration Form</h2>
 
     <?php if (isset($result)) echo $result; ?>
+    <?php if(!empty($form_errors)) echo show_errors($form_errors); ?>
 
     <form method="post" action="">
       <table>
@@ -105,7 +89,7 @@ else {
           <td><input type="password" value="" name="password"/></td>
         </tr>
         <tr>
-          <td><input style="float: right;" name="signupBtn" type="submit" value="Signin" /></td>
+          <td><input style="float: right;" name="signupBtn" type="submit" value="Submit" /></td>
         </tr>
       </table>
     </form>
