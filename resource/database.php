@@ -13,7 +13,7 @@ try {
   $db = new PDO($dsn, $username, $password);
 
   //set PDO error mode to exeption
-  $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXEPTION);
+  $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
   //display succes message
   echo "Connected to the register database";
