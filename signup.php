@@ -11,7 +11,7 @@ if (isset($_POST['email'])) {
     try {
 
       $sqlInsert = "INSERT INTO users (username, email, password, join_date)
-                    VALUES (:username, :password, now())";
+                    VALUES (:username, :email, :password, now())";
 
       $statement = $db->prepare($sqlInsert);
       $statement->execute(array(':username' => $username, ':email' => $email, ':password' => $password));
@@ -21,7 +21,7 @@ if (isset($_POST['email'])) {
       }
 
     } catch (PDOException $ex) {
-        $result = "<p>Error: ".$ex->getMessage()."</p>";
+        $result = "<p>This is an Error!: ".$ex->getMessage()."</p>";
       }
 }
 
