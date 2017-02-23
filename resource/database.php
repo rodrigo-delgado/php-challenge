@@ -16,7 +16,7 @@ try {
   $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
   //display succes message
-  echo "Connected to the register database";
+  // echo "Connected to the register database";
 
 } catch (PDOException $ex) {
   //dispaly error message
