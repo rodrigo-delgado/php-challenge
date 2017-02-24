@@ -79,4 +79,34 @@ function show_errors($form_errors_array) {
   return $errors;
 }
 
+
+function quickMessage ($message, $passOrFail = "Fail") {
+  if ($passOrFail === "Pass") {
+    $data = "<p>{$message}</p>";
+  } else {
+    $data = "<p>{$message}</p>";
+  }
+  return $data;
+}
+
+function redirectTo($page) {
+  header("Location: {$page}.php");
+}
+
+function checkDuplicateEntries($table, $column_name, $value, $db) {
+  try {
+
+    $sqlQuery = " SELECT * FROM " .$table. " WHERE " .$column_name."=:$column_name";
+    $statement = $db->prepare($sqlQuery);
+    $statement->execute(array(':$column_name' => $value));
+
+    if($row = $statement->fetch()) {
+      return true;
+    }
+    return false;
+
+  } catch (PDOException $ex) {
+      //handle exeption
+  }
+}
 ?>

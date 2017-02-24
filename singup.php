@@ -25,39 +25,54 @@ if (isset($_POST['signupBtn'])) {
     $form_errors = array_merge($form_errors, check_email($_POST));
 
 
-//check if error array is empty, if yes process form data and insert record
-if (empty($form_errors)) {
-
     //collect form data and store it in variables
     $email = $_POST['email'];
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    //hash the password doesn't work
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    //this does not work ask Pedro
+    if(checkDuplicateEntries("users", "email", $email, $db)) {
 
-    try {
-      //create SQL insert statements
-      $sqlInsert = "INSERT INTO users (username, email, password, join_date)
-                    VALUES (:username, :email, :password, now())";
+      $result = quickMessage("Email is already taken, try another one");
 
-      //use PDO prepared to sanitize data
-      $statement = $db->prepare($sqlInsert);
+    }
+    //this does not work ask Pedro
+    else if(checkDuplicateEntries("users", "username", $username, $db)) {
 
-      //add the data into the database
-      $statement->execute(array(':username' => $username, ':email' => $email, ':password' => $password));
+      $result = quickMessage("Username is already taken, try another one");
 
-      //check if one new row was created
-      if ($statement->rowCount() == 1) {
-          $result = "<p>Registration Successful</p>";
-      }
+    }
+    //check if error array is empty, if yes process form data and insert record
+    else if (empty($form_errors)) {
 
-    } catch (PDOException $ex) {
-        $result = "<p>This is an Error!: ".$ex->getMessage()."</p>";
-      }
+      //hash the password
+      $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+      try {
+        //create SQL insert statements
+        $sqlInsert = "INSERT INTO users (username, email, password, join_date)
+                      VALUES (:username, :email, :password, now())";
+
+        //use PDO prepared to sanitize data
+        $statement = $db->prepare($sqlInsert);
+
+        //add the data into the database
+        $statement->execute(array(':username' => $username, ':email' => $email, ':password' => $hashed_password));
+
+        //check if one new row was created
+        if ($statement->rowCount() == 1) {
+
+            $result = quickMessage("Registration successfull ", "Pass");
+        }
+
+      } catch (PDOException $ex) {
+
+          $result = quickMessage("We have an error: " .$ex->getMessage());
+        }
+    }
+
 }
 
-}
 ?>
 
 <!DOCTYPE html>
