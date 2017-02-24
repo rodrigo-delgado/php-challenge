@@ -82,9 +82,9 @@ function show_errors($form_errors_array) {
 
 function quickMessage ($message, $passOrFail = "Fail") {
   if ($passOrFail === "Pass") {
-    $data = "<p>{$message}</p>";
+    $data = "<p class='alert alert-success'>{$message}</p>";
   } else {
-    $data = "<p>{$message}</p>";
+    $data = "<p class='alert alert-danger>{$message}</p>";
   }
   return $data;
 }

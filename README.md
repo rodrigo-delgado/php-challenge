@@ -7,3 +7,4 @@ Errors:
 
 login does not redirect line 35 login.php && utilities line 92
 line 33 and 39 signup.php // this should output as a error text not SQL message.
+login page does not show any errors when press the button

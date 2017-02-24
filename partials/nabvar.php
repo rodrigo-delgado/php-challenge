@@ -10,6 +10,8 @@
   <meta name="author" content="">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/main.css" rel="stylesheet">
+  <script src="js/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
 
     <title><?php if(isset($page_title)) echo $page_title ?> </title>
   </head>
@@ -31,9 +33,17 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="index.php">Home</a></li>
-                <li><a href="login.php">Login</a></li>
-                <li><a href="singup.php">Sign Up</a></li>
+                <li><a href="index.php">Home</a></li>
+                <?php if(isset($_SESSION['username'])): ?>
+
+                  <li><a href="#">My Profile</a></li>
+                  <li><a href="logout.php">Logout</a></li>
+
+                <?php else: ?>
+                  <li><a href="login.php">Login</a></li>
+                  <li><a href="singup.php">Sign Up</a></li>
+                <?php endif ?>
+
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                   <ul class="dropdown-menu">
