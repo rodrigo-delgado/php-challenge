@@ -21,7 +21,7 @@ if (isset($_POST['loginBtn'])){
     //check if user exist in the database
     $sqlQuery = "SELECT * FROM users WHERE username = :username";
     $statement = $db->prepare($sqlQuery);
-    $statement->execute(array(':username' => $username));
+    $statement->execute(array(':username' => $user));
 
     while ($row = $statement->fetch()) {
       $id = $row['id'];
@@ -35,19 +35,16 @@ if (isset($_POST['loginBtn'])){
         $welcome = "<script type='text/javascript'>
                   swal({
                         title: 'Welcome back $username!',
-                        text: 'I will close in 2 seconds.',
+                        text: 'I will close in 5 seconds.',
                         timer: 5000,
                         type: 'success',
                         showConfirmButton: false });
 
-                  setTimeout(function(){
+                        setTimeout(function(){
                         window.location.href = 'index.php';
-                      }, 5000);
+                        }, 5000);
 
-                  </script>";
-
-        //should redirect to location, still not working
-        // redirectTo('index');
+                    </script>";
 
 
       } else {
@@ -60,7 +57,7 @@ if (isset($_POST['loginBtn'])){
     if(count($form_errors) == 1) {
       $result = quickMessage("There was an error in the form");
     } else {
-      $result = quickMessage("There were " .count($form_errors). " errors in the form");
+      $result = quickMessage("There were " .count($form_errors). " error in the form");
     }
   }
 }

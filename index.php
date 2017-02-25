@@ -1,6 +1,6 @@
 <?php
     $page_title ="";
-    include_once '/Applications/XAMPP/xamppfiles/htdocs/auth/partials/nabvar.php';
+    include_once 'partials/navbar.php';
 ?>
 
  <div class="container">
@@ -9,9 +9,9 @@
 
    </div>
  </div>
- 
 
-<?php include_once '/Applications/XAMPP/xamppfiles/htdocs/auth/partials/footer.php'; ?>
+
+<?php include_once 'partials/footer.php'; ?>
 
   </body>
 </html>

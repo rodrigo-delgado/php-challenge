@@ -72,10 +72,7 @@ if (isset($_POST['signupBtn'])) {
               setTimeout(function(){
                     window.location.href = 'index.php';
                   }, 5000);
-
               </script>";
-
-
         }
 
       } catch (PDOException $ex) {
@@ -86,8 +83,6 @@ if (isset($_POST['signupBtn'])) {
                   text: 'Please Try Again',
                   type: 'error',
                   cancelButtonText: 'OK!'});
-
-
             </script>";
         }
     }

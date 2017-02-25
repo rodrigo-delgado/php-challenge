@@ -2,7 +2,7 @@
 
 <?php
     $page_title ="Login Page";
-    include_once '/Applications/XAMPP/xamppfiles/htdocs/auth/partials/nabvar.php';
+    include_once 'partials/navbar.php';
     include_once 'partials/parseLogin.php';
 ?>
 
@@ -16,7 +16,7 @@
       <?php if(!empty($form_errors)) echo show_errors($form_errors); ?>
     </div>
     <div class="clearfix"> </div>
-    
+
     <div class="col-xs-6 col-md-4">
       <form method="post" action="">
 

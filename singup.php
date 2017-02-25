@@ -2,7 +2,7 @@
 
 <?php
     $page_title ="Register Page";
-    include_once '/Applications/XAMPP/xamppfiles/htdocs/auth/partials/nabvar.php';
+    include_once 'partials/navbar.php';
     include_once 'partials/parseSignup.php';
 ?>
 
