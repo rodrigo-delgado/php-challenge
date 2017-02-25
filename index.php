@@ -5,8 +5,10 @@
 
  <div class="container">
    <div class="body-title">
-     <h1>User Authentication System</h1><hr />
-
+     <div class="jumbotron">
+      <h2>Welcome</h2>
+      <p>Please use the Navbar</p>
+     </div>
    </div>
  </div>
 
