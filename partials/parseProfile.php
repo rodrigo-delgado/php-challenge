@@ -4,17 +4,8 @@ include_once 'resource/utilities.php';
 
 
 if((isset($_SESSION['id']) || isset($_GET['user_identity'])) && !isset($_POST['updateProfileBtn'])){
-  if(isset($_GET['user_identity'])) {
-    $url_encoded_id = $_GET['user_identity'];
-    $decode_id = base64_decode($url_encoded_id);
-    $user_id_array = explode("encodeuserid", $decode_id);
-    $id = $user_id_array[1];
 
-  } else {
-    $id = $_SESSION['id'];
-  }
-
-
+  $id = $_SESSION['id'];
 
   $sqlQuery = "SELECT * FROM users WHERE id = :id";
   $statement =$db->prepare($sqlQuery);

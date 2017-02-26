@@ -28,11 +28,12 @@ if (isset($_POST['loginBtn'])){
       $hashed_password = $row['password'];
       $username = $row['username'];
 
+
       if(password_verify($password, $hashed_password)) {
         $_SESSION['id'] = $id;
         $_SESSION['username'] = $username;
 
-        $welcome = "<script type='text/javascript'>
+        $result = "<script type='text/javascript'>
                   swal({
                         title: 'Welcome back $username!',
                         text: 'I will close in 5 seconds.',
@@ -48,17 +49,16 @@ if (isset($_POST['loginBtn'])){
 
 
       } else {
-          $result = quickMessage("Invalid Username or Password");
-      }
+        $result = "<script type='text/javascript'>
+                swal({
+                title: 'Yeah, Nah!',
+                text: 'Please Try Again',
+                type: 'error',
+                cancelButtonText: 'OK!'});
+                </script>";
     }
 
-  } else {
-
-    if(count($form_errors) == 1) {
-      $result = quickMessage("There was an error in the form");
-    } else {
-      $result = quickMessage("There were " .count($form_errors). " error in the form");
-    }
+  }
   }
 }
 ?>
